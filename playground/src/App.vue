@@ -7,7 +7,14 @@ const appStore = useAppStore()
 const count = ref(100)
 
 const map = new Map([['a', 1], ['b', 2]])
+
+/**
+ * 加法
+ * @param x 加数x
+ * @param y 加数y
+ */
 function add(x: number, y: number) {
+  console.log('a')
 }
 
 const doubleCount = computed(() => {
