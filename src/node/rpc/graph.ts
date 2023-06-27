@@ -1,9 +1,13 @@
 import type { ViteInspectAPI } from 'vite-plugin-inspect'
 
+/**
+ * 获得组件关系
+ * @param rpc
+ */
 export async function getComponentsRelationships(rpc: ViteInspectAPI['rpc']) {
   const list = await rpc.list()
   const modules = list?.modules || []
-
+  // TODO 有点迷惑
   return modules
   const vueModules = modules.filter(i => i.id.match(/\.vue($|\?v=)/))
 

@@ -45,7 +45,7 @@ export default function VitePluginVueDevTools(options: VitePluginVueDevToolsOpti
 
     // 创建一个通信服务，用于与客户端通信
     const rpc = createRPCServer<RPCFunctions>('vite-plugin-vue-devtools', server.ws, {
-      // TODO: 处理组件力导图
+      // 获得组件关系
       componentGraph: () => getComponentsRelationships(inspect.api.rpc),
       // TODO：vue inspect
       inspectClientUrl: () => `${config.base || '/'}__inspect/`,
