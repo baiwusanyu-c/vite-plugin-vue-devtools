@@ -170,6 +170,8 @@ export default function VitePluginVueDevTools(options: VitePluginVueDevToolsOpti
   return [
     plugin,
     inspect,
+    // 科比哥的 VueInspector，可以点击元素，
+    // 然后和ide联动自动打开代码文件，强 👍
     VueInspector({
       toggleComboKey: '',
       toggleButtonVisibility: 'never',
