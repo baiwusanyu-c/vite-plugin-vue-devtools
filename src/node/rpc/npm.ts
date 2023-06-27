@@ -2,6 +2,7 @@ import { detect, parseNi, parseNun } from '@antfu/ni'
 
 import type { ExecNpmScriptOptions } from '../../types'
 
+// 这个方法也很简单， 根据参数和配置 ，执行 npm 的安装或卸载依赖包指令
 export async function execNpmScript(packages: string[], options: ExecNpmScriptOptions = {}) {
   const {
     isDev = false,
