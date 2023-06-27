@@ -47,7 +47,8 @@ export default function VitePluginVueDevTools(options: VitePluginVueDevToolsOpti
     const rpc = createRPCServer<RPCFunctions>('vite-plugin-vue-devtools', server.ws, {
       // 获得组件关系
       componentGraph: () => getComponentsRelationships(inspect.api.rpc),
-      // TODO：vue inspect
+      // 科比哥的 VueInspector，可以点击元素，
+      // 然后和ide联动自动打开代码文件，强 👍
       inspectClientUrl: () => `${config.base || '/'}__inspect/`,
       // 获取项目静态资源
       staticAssets: () => getStaticAssets(config),
