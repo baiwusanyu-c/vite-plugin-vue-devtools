@@ -8,6 +8,10 @@ import type { AssetInfo, AssetType, ImageMeta } from '../../types'
 
 const _imageMetaCache = new Map<string, ImageMeta | undefined>()
 
+/**
+ * 分类静态资源
+ * @param path
+ */
 function guessType(path: string): AssetType {
   if (/\.(a?png|jpe?g|gif|svg|webp|avif|ico|bmp|tiff?)$/i.test(path))
     return 'image'
@@ -22,6 +26,10 @@ function guessType(path: string): AssetType {
   return 'other'
 }
 
+/**
+ * 读取项目内所有静态资源（图片、字体、视频等）
+ * @param config
+ */
 export async function getStaticAssets(config: ResolvedConfig): Promise<AssetInfo[]> {
   const dir = resolve(config.root)
   const baseURL = config.base
@@ -59,6 +67,11 @@ export async function getStaticAssets(config: ResolvedConfig): Promise<AssetInfo
   }))
 }
 
+/**
+ * 根据文件路径获取图片元信息
+ * 宽、高、尺寸等
+ * @param filepath
+ */
 export async function getImageMeta(filepath: string) {
   if (_imageMetaCache.has(filepath))
     return _imageMetaCache.get(filepath)
@@ -74,6 +87,11 @@ export async function getImageMeta(filepath: string) {
   }
 }
 
+/**
+ * 根据文件路径获取文本类静态资源的缩略内容
+ * @param filepath
+ * @param limit
+ */
 export async function getTextAssetContent(filepath: string, limit = 300) {
   try {
     const content = await fs.readFile(filepath, 'utf-8')

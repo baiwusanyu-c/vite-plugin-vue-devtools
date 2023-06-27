@@ -1,5 +1,6 @@
 import path from 'node:path'
 import fg from 'fast-glob'
+
 // 读取项目中所有的 sfc
 export async function getVueSFCList(root: string) {
   const files = await fg([

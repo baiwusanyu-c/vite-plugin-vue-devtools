@@ -9,7 +9,6 @@ import { createRPCServer } from '../vite-dev-rpc'
 import { DIR_CLIENT } from '../dir'
 import type { ExecNpmScriptOptions, RPCFunctions } from '../types'
 import { execNpmScript, getComponentInfo, getComponentsRelationships, getImageMeta, getPackages, getStaticAssets, getTextAssetContent, getVueSFCList } from './rpc'
-import {de} from "vis-network/declarations/network/locales";
 
 const NAME = 'vite-plugin-vue-devtools'
 
@@ -50,11 +49,11 @@ export default function VitePluginVueDevTools(options: VitePluginVueDevToolsOpti
       componentGraph: () => getComponentsRelationships(inspect.api.rpc),
       // TODO：vue inspect
       inspectClientUrl: () => `${config.base || '/'}__inspect/`,
-      // TODO: 获取项目静态资源
+      // 获取项目静态资源
       staticAssets: () => getStaticAssets(config),
-      // TODO: 获取项目图片资源
+      // 根据文件路径获取图片元信息宽、高、尺寸等
       getImageMeta,
-      // TODO: 获取项目文字等静态资源
+      // 根据文件路径获取文本类静态资源的缩略内容
       getTextAssetContent,
       // 获取项目包依赖信息vue 版本等
       getPackages: async () => {
