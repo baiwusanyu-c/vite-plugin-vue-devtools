@@ -1,7 +1,6 @@
 import { createApp, h } from 'vue'
-
 // 虚拟模块。这是客户端的根组件
-import App from 'virtual:vue-devtools-path:Container.vue'
+import App from 'virtual:vue-devtools-path:views/Main.vue'
 
 // TODO: 猜测这是在客户端的事件执行方法，用于执行服务端的事件消息等
 const hook = window.__VUE_DEVTOOLS_GLOBAL_HOOK__ ??= {

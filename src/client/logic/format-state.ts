@@ -1,4 +1,4 @@
-function getFuntionDetails(func: Function) {
+function getFunctionDetails(func: Function) {
   let string = ''
   let matches: RegExpMatchArray | null = null
   try {
@@ -73,7 +73,7 @@ export function formatStateType(value: unknown): StateType {
     return {
       rawType: 'function',
       recursive: false,
-      value: getFuntionDetails(value),
+      value: getFunctionDetails(value),
     }
   }
   else if (typeof value === 'bigint') {
@@ -92,14 +92,14 @@ export function formatStateType(value: unknown): StateType {
       value: 'NaN',
     }
   }
-  else if (value === Infinity) {
+  else if (value === Number.POSITIVE_INFINITY) {
     return {
       rawType: 'literal',
       recursive: false,
       value: 'Infinity',
     }
   }
-  else if (value === -Infinity) {
+  else if (value === Number.NEGATIVE_INFINITY) {
     return {
       rawType: 'literal',
       recursive: false,

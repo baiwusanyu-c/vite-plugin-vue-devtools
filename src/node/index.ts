@@ -100,6 +100,7 @@ export default function VitePluginVueDevTools(options: VitePluginVueDevToolsOpti
             rpc.onTerminalExit({ data })
         },
       }),
+      root: () => config.root,
     })
   }
   const plugin = <PluginOption>{

@@ -1,5 +1,7 @@
 import type { Router } from 'vue-router'
 
+type WithOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+
 export interface ComponentRelationship {
   id: string
   deps: string[]
@@ -51,6 +53,7 @@ export interface RPCFunctions {
   onTerminalExit(_: { id?: string; data?: string }): void
   installPackage(packages: string[], options?: ExecNpmScriptOptions): Promise<void>
   uninstallPackage(packages: string[], options?: ExecNpmScriptOptions): Promise<void>
+  root(): Promise<string>
 }
 
 export interface ModulesList {
@@ -59,15 +62,13 @@ export interface ModulesList {
   ssrModules: ModuleInfo[]
 }
 
+export type OpenInEditorFn = (filePath: string, line?: number, column?: number) => any
+
 export interface VueDevtoolsHostClient {
   markClientLoaded: () => void
-  inspector?: {
-    enable: () => void
-    disable: () => void
-  }
   panel?: {
     toggleViewMode: (mode?: 'xs' | 'default') => void
-    togglePosition: (position: string) => void
+    popup: () => void
     toggle: () => void
   }
   hook: {
@@ -77,16 +78,26 @@ export interface VueDevtoolsHostClient {
   }
   hookBuffer: [string, Record<string, any>][]
   categorizedHookBuffer: Record<string, [string, Record<string, any>][]>
+  openInEditor: OpenInEditorFn
 }
 
-export interface BuiltinTab {
+export type BuiltinTabGroup = 'app' | 'modules' | 'advanced'
+export type AllTabGroup = BuiltinTabGroup | 'ungrouped'
+
+export interface Tab {
   event?: (client: VueDevtoolsHostClient, router: Router) => void
   path?: string
+  // temporal use title as unique id
   title: string
   icon: string
-  category?: string
+  // use by settings, show/hide tab
+  disabled: boolean
+  // use by group
+  group: AllTabGroup
+  groupIndex: number
 }
 
+export type BuiltinTab = WithOptional<Tab, 'group' | 'groupIndex' | 'disabled'>
 export interface DocumentInfo {
   id: string
   name: string
